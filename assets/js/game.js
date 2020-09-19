@@ -198,45 +198,34 @@ for(var i = 0; i < enemyInfo.length.length; i++) {
 startGame();
 //funtion to end the entire game
 var endGame = function () {
-  if (playerInfo.health > 0){
-  window.alert("Great job, you've survived the game! You know have a score of " + playerInfo.money + ".");
+  window.alert("The game has now ended. Let's see how you did!");
+
+  // check localStorage for high score, if it's not there, use 0
+  var highScore = localStorage.getItem("highscore");
+  if (highScore === null) {
+    highScore = 0;
   }
+  // if player have more money than the high score, player has new high score!
+  if (playerInfo.money > highScore) {
+    localStorage.setItem("highscore", playerInfo.money);
+    localStorage.setItem("name", playerInfo.name);
+
+    alert(playerInfo.name + " now has the high score of " + playerInfo.money + "!");
+  } 
   else {
-    window.alert("You've lost your robot in battle.")
+    alert(playerInfo.name + " did not beat the high score of " + highScore + ". Maybe next time!");
   }
+
   // ask player if they'd like to play again
-var playAgainConfirm = window.confirm("Would you like to play again?");
-var shop = function() {
-  var shopOptionPrompt = window.prompt(
-    "Would you like to REFILL your health, UPGRADE your attack, or LEAVE the store? Please enter one: 'REFILL', 'UPGRADE', or 'LEAVE' to make a choice."
-    );
-    // use switch to carry out action
-switch (shopOptionPrompt) {
-  case "REFILL": // new case
-  case "refill":
-    playerInfo.refillHealth();
-    break;
-  case "UPGRADE": // new case
-  case "upgrade":
-   playerInfo.upgradeAttack();
-    break;
-  case "LEAVE": // new case
-  case "leave":
-    window.alert("Leaving the store.");
-    break;
-  default:
-    window.alert("You did not pick a valid option. Try again.");
-    shop();
-    break;
-  
+  var playAgainConfirm = window.confirm("Would you like to play again?");
+
+  if (playAgainConfirm) {
+    startGame();
+  } 
+  else {
+    window.alert("Thank you for playing Battlebots! Come back soon!");
+  }
 };
-if (playAgainConfirm) {
-  // restart the game
-  startGame();
-} 
-else {
-  window.alert("Thank you for playing Robot Gladiators! Come back soon!");
-}
 }
 
 }
