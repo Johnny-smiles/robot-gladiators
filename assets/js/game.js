@@ -78,8 +78,17 @@ var fight = function(enemy) {
     }
   }  
 };
+var getPlayerName = function(){
+  var name = "";
+    while(name === "" || name === null){
+      name = prompt("What is your robot's name?");
+    }
+
+  console.log("Your robot's name is " + name);
+  return name;
+}
 var playerInfo = {
-  name: window.prompt("What is your robot's name?"),
+  name: getPlayerName,
   health: 100,
   attack: 10,
   money: 10,
@@ -106,24 +115,25 @@ var playerInfo = {
 var enemyInfo = [
   {
     name: "Roborto",
-    attack: randomNumber(10, 14)
+    attack: randomNumber( 10, 14)
   },
   {
     name: "Amy Android",
-    attack: randomNumber(10, 14)
+    attack: randomNumber( 10, 14)
   },
   {
     name: "Robo Trumble",
-    attack: randomNumber(10, 14)
+    attack: randomNumber( 10, 14)
   }
 ];
 var startGame = function() {
-  debugger
+  
   // reset player stats
   playerInfo.reset();
 for(var i = 0; i < enemyInfo.length.length; i++) {
   if(playerInfo.health > 0) {
     window.alert("welcome to Robot Gladiaors! Round " + (i + 1));
+    debugger
     var pickedEnemyObj = enemyInfo[i];
     pickedEnemyObj.health = randomNumber(40, 60);
     //debugger;
